@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace login_register_api.Controllers
 {
-    [Route("")]
+    [Route("users")]
     public class UserController : Controller
     {
         private readonly UserDbContext _ctx;

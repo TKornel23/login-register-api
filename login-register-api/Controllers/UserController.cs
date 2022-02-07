@@ -23,10 +23,17 @@ namespace login_register_api.Controllers
         public ITokenService TokenService { get; }
 
         [HttpGet]
-        [Authorize]
+        [AllowAnonymous]
         public  async Task<ActionResult> Index()
         {
             return Ok(await _ctx.Users.ToListAsync<User>());
+        }
+
+        [Authorize]
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetOne(int id)
+        {
+            return Ok(await _ctx.Users.FirstOrDefaultAsync<User>(user => user.Id == id));
         }
 
         [HttpPost("login")]

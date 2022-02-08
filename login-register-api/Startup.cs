@@ -34,6 +34,7 @@ namespace login_register_api
         {
             services.AddScoped<ITokenService, TokenService>();
             services.AddControllers();
+            services.AddCors();
             services.AddDbContext<UserDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("localhost")));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -58,7 +59,7 @@ namespace login_register_api
 
             app.UseRouting();
 
-            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
 
             app.UseAuthentication();
             app.UseAuthorization();
